@@ -3,8 +3,7 @@
 Welcome to **Taskify**, a simple yet powerful Todo App designed to help you organize your daily tasks efficiently. Built with modern web technologies, Taskify provides a clean and user-friendly interface to boost productivity.
 
 ## 🌟 Features
-- 📌 Add, Edit, Delete, and Mark Tasks as Completed.
-- 📅 Task Categorization for better organization.
+- 📌 Add, Delete, and Mark Tasks as Completed.
 - 💪 Responsive Design using Tailwind CSS.
 - 💡 Random Quote Generator to keep you motivated.
 - ⚛️ Built with React for efficient state management using Context API.
@@ -19,31 +18,33 @@ Check out the live app: [Taskify - Live](Your Vercel Deployment Link)
 
 ## 📂 Getting Started
 ### Clone the Repository
-```bash
+```
  git clone https://github.com/PriyanshuGo/Taskify.git
 ```
 
 ### Install Dependencies
-```bash
+```
 npm install
 ```
 
 ### Run the App Locally
-```bash
+```
 npm start
 ```
 
-App will run on `http://localhost:3000`
+App will run on `http://localhost:5173`
 
 ## 📁 Project Structure
 ```
 /src
   ├── components
-  │   ├── TodoForm.jsx
-  │   ├── TodoList.jsx
+  │   ├── AddTask.jsx
+  │   ├── DisplayTask.jsx
+  │   └── Head.jsx
   │   └── Quote.jsx
+  │   └── TaskItem.jsx
   ├── context
-  │   └── TodoContext.js
+  │   └── TaskContext.js
   ├── App.jsx
   └── index.js
 ```
