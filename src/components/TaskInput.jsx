@@ -3,15 +3,15 @@ import { TaskContext } from "../contextCreate/TaskContext";
 
 function TaskInput() {
   const { tasks, setTasks } = useContext(TaskContext);
-  const [task, setTask] = useState("");
+  const [singleTask, setSingleTask] = useState("");
 
   const AddNewTask = () => {
-    const trimedTask = task.trim();
-    if (trimedTask.length > 0 && !tasks.allTask.includes(trimedTask)) {
-      const addedTask = { ...tasks, allTask: [task, ...tasks.allTask] };
+    const trimedTask = singleTask.trim();
+    if (trimedTask.length > 0 && !tasks.includes(trimedTask)) {
+      const addedTask = [singleTask,...tasks];
       localStorage.setItem("Task", JSON.stringify(addedTask));
       setTasks(addedTask);
-      setTask("");
+      setSingleTask("");
     }
   };
 
@@ -23,8 +23,8 @@ function TaskInput() {
       >
         <input
           type="text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
+          value={singleTask}
+          onChange={(e) => setSingleTask(e.target.value)}
           className="border-2 border-black rounded-2xl p-2 pr-5 bg-white h-full focus:outline-none placeholder:text-gray-500"
           placeholder="What needs to be done?"
         />

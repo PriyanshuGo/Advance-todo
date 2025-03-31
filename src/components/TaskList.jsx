@@ -3,37 +3,28 @@ import { TaskContext } from "../contextCreate/TaskContext";
 import { CircleX } from "lucide-react";
 
 function TaskList({ handleDeleteTask }) {
-  const { tasks } = useContext(TaskContext);
+  const { tasks = [] } = useContext(TaskContext); // Ensure tasks is always an array
 
   return (
-    <div className="space-y-10 my-10">
-      {tasks.allTask.length > 0 ? (
-        <p className="text-2xl text-white">
-          Your Tasks({tasks.allTask.length})
+    <div className="my-10 space-y-6">
+      {tasks.length > 0 && (
+        <p className="text-2xl text-white font-semibold">
+          Your Tasks ({tasks.length})
         </p>
-      ) : null}
-      {tasks.allTask
-        ? tasks.allTask.map((el, index) => (
-            <div
-              key={index}
-              className=" flex p-5 text-white bg-gray-800 rounded  space-x-4 transition-all hover:bg-gray-700/80"
-            >
-              <p
-                className={`flex-1 ${
-                  tasks.completedTask.includes(el)
-                    ? "line-through text-gray-400"
-                    : null
-                }`}
-              >
-                {el}
-              </p>
-              <CircleX
-                onClick={() => handleDeleteTask(el, index)}
-                className="cursor-pointer text-red-600"
-              />
-            </div>
-          ))
-        : null}
+      )}
+      {tasks.map((el, index) => (
+        <div
+          key={index}
+          className="flex items-center justify-between p-4 bg-gray-800 rounded-lg transition-all hover:bg-gray-700/80 shadow-md"
+        >
+          <span className="text-white text-lg">{el}</span>
+          <CircleX
+            onClick={() => handleDeleteTask(el, index)}
+            className="cursor-pointer text-red-500 hover:text-red-700 transition-colors"
+            size={24}
+          />
+        </div>
+      ))}
     </div>
   );
 }

@@ -21,25 +21,18 @@ function DisplayTask() {
   }
 
   const handleDeleteTask = (el) => {
-    const updatedAllTasks = tasks.allTask.filter((element) => element !== el);
-    const updatedCompletedTasks = tasks.completedTask.filter(
-      (element) => element !== el
-    );
-    const updatedTask = {
-      allTask: updatedAllTasks,
-      completedTask: updatedCompletedTasks,
-    };
-    setTasks(updatedTask);
-    localStorage.setItem("Task", JSON.stringify(updatedTask));
+    const updatedAllTasks = tasks.filter((element) => element !== el);
+    setTasks(updatedAllTasks);
+    localStorage.setItem("Task", JSON.stringify(updatedAllTasks));
   };
 
   const handleClearAllTask = () => {
-    setTasks({ allTask: [], completedTask: [] });
+    setTasks([]);
     setShowConfirm(false);
     localStorage.clear();
   };
 
-  if (!tasks.allTask.length > 0) {
+  if (!tasks.length) {
     return (
       <div className="text-center py-10 text-gray-400">
         <Clock className="h-12 w-12 mx-auto mb-4 opacity-50" />

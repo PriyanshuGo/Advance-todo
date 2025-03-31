@@ -1,16 +1,29 @@
-import TaskInput from "./components/TaskInput";
-import DisplayTask from "./components/DisplayTask";
-import Head from "./components/Head";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+import { TaskProvider } from "./contextCreate/TaskContext.jsx";
+import Login from "./components/Login";
+import Todo from "./pages/Todo.jsx";
+import AuthGuard from "./components/AuthGuard.jsx";
+
 
 function App() {
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route>
+        <Route path="/" element={<AuthGuard><Todo /></AuthGuard>} />
+        <Route path="/login" element={<Login />} />
+      </Route>
+    )
+  );
   return (
-    <div className="flex flex-col items-center">
-      <Head />
-      <div className=" bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-700">
-        <TaskInput />
-        <DisplayTask />
-      </div>
-    </div>
+    <TaskProvider>
+      <RouterProvider router={router} />
+    </TaskProvider>
   );
 }
 
