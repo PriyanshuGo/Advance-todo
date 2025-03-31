@@ -9,7 +9,7 @@ function AuthGuard({ children }) {
     if (!isUser) {
       navigate("/login");
     }
-  }, [isUser]); 
+  }, []); 
 
   return isUser ? children : null; 
 }
