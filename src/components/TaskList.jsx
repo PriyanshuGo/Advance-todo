@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { TaskContext } from "../contextCreate/TaskContext";
 import { CircleX } from "lucide-react";
+import TaskItem from "./TaskItem";
 
 function TaskList({ handleDeleteTask }) {
   // Access tasks and setTasks
@@ -25,7 +26,10 @@ function TaskList({ handleDeleteTask }) {
           className="relative flex items-center p-4 bg-gray-800 rounded-lg transition-all hover:bg-gray-700/80 shadow-md"
         >
           {/* Task Text */}
-          <span className="text-white text-lg">{el.text}</span>
+          <span className="text-white text-lg">
+            {" "}
+            <TaskItem task={el} />
+          </span>
 
           {/* Priority & Delete Button */}
           <div className="absolute top-2 right-2 flex items-center ">

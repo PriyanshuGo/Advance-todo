@@ -6,6 +6,8 @@ import TaskList from "./TaskList";
 function DisplayTask() {
   // Access tasks and setTasks
   const { tasks, setTasks } = useContext(TaskContext);
+  // confirmation to delete all
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const handleDeleteTask = (el) => {
     const updatedAllTasks = tasks.filter((element) => element !== el); // Remove selected task

@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { TaskProvider } from "./contextCreate/TaskContext.jsx";
-import Login from "./components/Login";
+import Login from "./pages/Login.jsx";
 import Todo from "./pages/Todo.jsx";
 import AuthGuard from "./components/AuthGuard.jsx";
 
