@@ -1,7 +1,7 @@
-import { CircleCheck, CircleX, Trash2, Clock } from "lucide-react";
+import { Trash2, Clock } from "lucide-react";
 import { useState, useEffect, useContext } from "react";
 import { TaskContext } from "../contextCreate/TaskContext";
-import TaskItem from "./TaskItem";
+import TaskList from "./TaskList";
 
 function DisplayTask() {
   const { tasks, setTasks } = useContext(TaskContext);
@@ -19,19 +19,6 @@ function DisplayTask() {
   if (loading) {
     return null;
   }
-
-  const handleTaskCompleted = (el) => {
-    const updatedTasks = tasks.completedTask.includes(el)
-      ? tasks.completedTask.filter((i) => i !== el)
-      : [el, ...tasks.completedTask];
-
-    const updateLocalStorage = { ...tasks, completedTask: updatedTasks };
-
-    if (JSON.stringify(updatedTasks) !== JSON.stringify(tasks.completedTask)) {
-      setTasks(updateLocalStorage);
-      localStorage.setItem("Task", JSON.stringify(updateLocalStorage));
-    }
-  };
 
   const handleDeleteTask = (el) => {
     const updatedAllTasks = tasks.allTask.filter((element) => element !== el);
@@ -64,8 +51,7 @@ function DisplayTask() {
 
   return (
     <div>
-      <TaskItem
-        handleTaskCompleted={handleTaskCompleted}
+      <TaskList
         handleDeleteTask={handleDeleteTask}
       />
       {showConfirm ? (

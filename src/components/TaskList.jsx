@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { TaskContext } from "../contextCreate/TaskContext";
-import { CircleCheck, CircleX } from "lucide-react";
+import { CircleX } from "lucide-react";
 
-function TaskItem({ handleTaskCompleted, handleDeleteTask }) {
+function TaskList({ handleDeleteTask }) {
   const { tasks } = useContext(TaskContext);
 
   return (
@@ -27,10 +27,6 @@ function TaskItem({ handleTaskCompleted, handleDeleteTask }) {
               >
                 {el}
               </p>
-              <CircleCheck
-                onClick={() => handleTaskCompleted(el)}
-                className="cursor-pointer text-green-600"
-              />
               <CircleX
                 onClick={() => handleDeleteTask(el, index)}
                 className="cursor-pointer text-red-600"
@@ -42,4 +38,4 @@ function TaskItem({ handleTaskCompleted, handleDeleteTask }) {
   );
 }
 
-export default TaskItem;
+export default TaskList;

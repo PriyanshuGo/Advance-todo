@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { TaskContext } from "../contextCreate/TaskContext";
 
-function AddTask() {
+function TaskInput() {
   const { tasks, setTasks } = useContext(TaskContext);
   const [task, setTask] = useState("");
 
@@ -39,4 +39,4 @@ function AddTask() {
   );
 }
 
-export default AddTask;
+export default TaskInput;
