@@ -2,26 +2,33 @@ import { useState, useContext } from "react";
 import { TaskContext } from "../contextCreate/TaskContext";
 
 function TaskInput() {
+  // Access tasks state and setTasks
   const { tasks, setTasks } = useContext(TaskContext);
+
+  // Local state to manage user input for a task and its priority
   const [singleTask, setSingleTask] = useState("");
   const [priority, setPriority] = useState("Medium");
 
+  // Function to handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    const trimmedTask = singleTask.trim(); // Remove extra spaces from task input
 
-    const trimmedTask = singleTask.trim();
-    if (trimmedTask.length > 0 && !tasks.some(task => task.text === trimmedTask)) {
-      const addedTask = [...tasks,{ text: trimmedTask, priority }];
-      localStorage.setItem("Task", JSON.stringify(addedTask));
-      setTasks(addedTask);
-      setSingleTask("");
+    // Ensure the task is not empty and doesn't already exist in the list
+    if (
+      trimmedTask.length > 0 &&
+      !tasks.some((task) => task.text === trimmedTask)
+    ) {
+      const addedTask = [...tasks, { text: trimmedTask, priority }]; // Create new task object and update state
+      localStorage.setItem("Task", JSON.stringify(addedTask)); // Save tasks to local storage
+      setTasks(addedTask); // Update task state
+      setSingleTask(""); // Clear input field after adding task
     }
   };
 
   return (
     <div className="flex justify-center w-full">
       <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
-        {/* Full-width input field */}
         <input
           type="text"
           value={singleTask}
@@ -30,7 +37,6 @@ function TaskInput() {
           className="px-4 py-3 rounded-lg bg-gray-700 text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
 
-        {/* Priority + Button in one row with better spacing */}
         <div className="flex space-x-2">
           <select
             value={priority}

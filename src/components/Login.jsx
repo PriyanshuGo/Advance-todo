@@ -3,13 +3,15 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
+    // State to manage email, password, and error messages
   const [email, setEmail] = useState("eve.holt@reqres.in");
   const [password, setPassword] = useState("cityslicka");
   const [error, setError] = useState(""); 
 
   const navigate = useNavigate();
-
   const baseURl = "https://reqres.in"
+
+    // Function to handle login submission
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(""); 
@@ -18,7 +20,7 @@ function Login() {
     try {
         const res = await axios.post(`${baseURl}/api/login`,{email,password})
         console.log("✅ Login successful! Token:");
-        localStorage.setItem("token",res.data.token);
+        localStorage.setItem("token",res.data.token); // Store token in localStorage
         navigate("/")
     } catch (error) {
       setError("Invalid email or password. Please try again.");

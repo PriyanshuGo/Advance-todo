@@ -3,7 +3,8 @@ import { TaskContext } from "../contextCreate/TaskContext";
 import { CircleX } from "lucide-react";
 
 function TaskList({ handleDeleteTask }) {
-  const { tasks = [] } = useContext(TaskContext); // Ensure tasks is always an array
+  // Access tasks and setTasks
+  const { tasks } = useContext(TaskContext);
 
   // Priority sorting: High -> Medium -> Low
   const sortedTasks = [...tasks].sort((a, b) => {

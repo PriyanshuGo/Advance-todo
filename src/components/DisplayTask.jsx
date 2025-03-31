@@ -1,24 +1,26 @@
 import { Trash2, Clock } from "lucide-react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { TaskContext } from "../contextCreate/TaskContext";
 import TaskList from "./TaskList";
 
 function DisplayTask() {
+  // Access tasks and setTasks
   const { tasks, setTasks } = useContext(TaskContext);
-  const [showConfirm, setShowConfirm] = useState(false);
-  
+
   const handleDeleteTask = (el) => {
-    const updatedAllTasks = tasks.filter((element) => element !== el);
-    setTasks(updatedAllTasks);
-    localStorage.setItem("Task", JSON.stringify(updatedAllTasks));
+    const updatedAllTasks = tasks.filter((element) => element !== el); // Remove selected task
+    setTasks(updatedAllTasks); // Update state
+    localStorage.setItem("Task", JSON.stringify(updatedAllTasks)); // Update local storage
   };
 
+  // This function resets the task list and local storage
   const handleClearAllTask = () => {
     setTasks([]);
     setShowConfirm(false);
     localStorage.clear();
   };
 
+  // If there are no tasks, display a placeholder message
   if (!tasks.length) {
     return (
       <div className="text-center py-10 text-gray-400">
@@ -31,9 +33,7 @@ function DisplayTask() {
 
   return (
     <div>
-      <TaskList
-        handleDeleteTask={handleDeleteTask}
-      />
+      <TaskList handleDeleteTask={handleDeleteTask} />
       {showConfirm ? (
         <div className="border border-red-600 bg-red-900/30 rounded-md px-8 py-4 text-white space-y-4">
           <p>Are you sure you want to delete all tasks?</p>
