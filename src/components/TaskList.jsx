@@ -5,6 +5,12 @@ import { CircleX } from "lucide-react";
 function TaskList({ handleDeleteTask }) {
   const { tasks = [] } = useContext(TaskContext); // Ensure tasks is always an array
 
+  // Priority sorting: High -> Medium -> Low
+  const sortedTasks = [...tasks].sort((a, b) => {
+    const priorityOrder = { High: 1, Medium: 2, Low: 3 };
+    return priorityOrder[a.priority] - priorityOrder[b.priority];
+  });
+
   return (
     <div className="my-10 space-y-6">
       {tasks.length > 0 && (
@@ -12,17 +18,25 @@ function TaskList({ handleDeleteTask }) {
           Your Tasks ({tasks.length})
         </p>
       )}
-      {tasks.map((el, index) => (
+      {sortedTasks.map((el, index) => (
         <div
           key={index}
-          className="flex items-center justify-between p-4 bg-gray-800 rounded-lg transition-all hover:bg-gray-700/80 shadow-md"
+          className="relative flex items-center p-4 bg-gray-800 rounded-lg transition-all hover:bg-gray-700/80 shadow-md"
         >
-          <span className="text-white text-lg">{el}</span>
-          <CircleX
-            onClick={() => handleDeleteTask(el, index)}
-            className="cursor-pointer text-red-500 hover:text-red-700 transition-colors"
-            size={24}
-          />
+          {/* Task Text */}
+          <span className="text-white text-lg">{el.text}</span>
+
+          {/* Priority & Delete Button */}
+          <div className="absolute top-2 right-2 flex items-center ">
+            <span className="text-xs font-semibold px-2 py-1 rounded  text-white">
+              {el.priority}
+            </span>
+            <CircleX
+              onClick={() => handleDeleteTask(el, index)}
+              className="cursor-pointer text-red-500 hover:text-red-700 transition-colors"
+              size={24}
+            />
+          </div>
         </div>
       ))}
     </div>

@@ -6,20 +6,7 @@ import TaskList from "./TaskList";
 function DisplayTask() {
   const { tasks, setTasks } = useContext(TaskContext);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [loading, setLoading] = useState(true); 
   
-  useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("Task"));
-    if (stored) {
-      setTasks(stored);
-    }
-    setLoading(false);
-  }, []);
-
-  if (loading) {
-    return null;
-  }
-
   const handleDeleteTask = (el) => {
     const updatedAllTasks = tasks.filter((element) => element !== el);
     setTasks(updatedAllTasks);
